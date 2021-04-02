@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试报告</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--    页面样式-->
+    <style type="text/css">
+        /*标题样式*/
+        .title {
+            width: auto;
+            height: 60px;
+            text-align: center;
+            font: bolder 38px/60px "Microsoft YaHei UI";
+        }
+
+        /*汇总信息样式*/
+        .summary {
+            width: 90%;
+            position: absolute;
+            top: 120px;
+            margin-left: 5%;
+
+        }
+
+        .text-left {
+            font: bolder 20px/30px "Microsoft YaHei UI";
+        }
+
+        .left {
+            width: 50%;
+            float: left;
+
+        }
+
+        .right {
+            width: 50%;
+            float: right;
+
+        }
+
+        .desc {
+            float: left;
+            width: 100%;
+        }
+
+        .list-group-item span {
+            font: normal 16px/38px "Microsoft YaHei UI";
+            padding: 30px;
+
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: .4rem 1.25rem;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        /* 执行信息样式   */
+        .test_info {
+            width: 90%;
+            position: absolute;
+            top: 900px;
+            margin-left: 5%;
+
+            color: #28a745 !important;
+        }
+
+        .table td, th {
+            border: solid 2px rgba(9, 122, 51, 0.11) !important;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+
+        select {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 2em;
+            width: 8em;
+            margin-left: 2em;
+        }
+
+        option {
+            text-align: center;
+            height: 36px;
+            font: none 18px/36px "Microsoft YaHei UI";
+            color: #28a745 !important;
+        }
+
+        .test_log {
+            background: rgba(163, 171, 189, 0.15);
+            width: 100%;
+            height: 50px;
+            border-top: none;
+            border-bottom: none;
+            display: none;
+            text-align: left;
+        }
+
+        .test_log td {
+            text-align: left;
+            height: 30px;
+            margin: 0;
+            padding-left: 3em;
+            padding-right:3em;
+            font: none 18px/24px "Microsoft YaHei UI";
+            color: #9e141a;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /*    测试图表显示*/
+        .char {
+            width: 90%;
+            position: absolute;
+            top: 450px;
+            margin-left: 5%;
+            color: #28a745 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--报告标题-->
+<div class="title text-success">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">测试报告</div>
+</div>
+
+<!--汇总信息-->
+<div class="summary">
+    <p class="text-left text-success">测试结果汇总</p>
+    <div class="left">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">测试人员</button>
+                <span class="text-dark">刘坤</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">开始时间</button>
+                <span class="text-dark">2021-03-31 12:43:06</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">执行时间</button>
+                <span class="text-dark">3.73 S</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">用例总数</button>
+                <span class="text-dark">25</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="right">
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">成功用例</button>
+                <span class="text-success">23</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger">失败用例</button>
+                <span class="text-warning">2</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning">错误用例</button>
+                <span class="text-danger">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-secondary">跳过用例</button>
+                <span class="text-secondary">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="desc">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">描述信息</button>
+                <span class="text-secondary">金融项目测试生成的报告</span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<!--测试图表-->
+<div class="char">
+    <p class="text-left text-success">图表展示</p>
+    <div id="char2" style="width: 49%;height: 400px;float: left"></div>
+    <div id="char" style="width: 49%;height: 400px ;float: left"></div>
+</div>
+
+<!--详细信息-->
+<div class="test_info">
+
+    <p class="text-left text-success">详细信息</p>
+    <div class="table_data">
+
+        <table class="table">
+            <thead class="bg-success text-light">
+            <tr>
+                <th scope="col" style="width: 5%;padding: 0">编号</th>
+                <th scope="col" style="width: 20%;padding: 0">
+                    <span>测试类</span>
+                    <select id="testClass">
+                        <option>所有</option>
+                        
+                            <option>MingWEN</option>
+                        
+                            <option>SmsCode</option>
+                        
+                            <option>register</option>
+                        
+                            <option>longin</option>
+                        
+                            <option>longin</option>
+                        
+                            <option>test_newpaypd</option>
+                        
+                    </select>
+
+                </th>
+
+                <th scope="col" style="width: 15%;padding: 0">测试方法</th>
+                <th scope="col" style="width: 20%;padding: 0">用例描述</th>
+                <th scope="col" style="width: 10%;padding: 0">执行时间</th>
+                <th scope="col" style="width: 20%;padding: 0">
+
+                    <span>执行结果</span>
+                    <select id="testResult">
+                        <option>所有</option>
+                        <option class="text-success">成功</option>
+                        <option class="text-danger">失败</option>
+                        <option class="text-warning">错误</option>
+                        <option class="text-info">跳过</option>
+                    </select>
+
+                </th>
+                <th scope="col" style="width: 10%;padding: 0">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>1</td>
+                    <td class="MingWEN">MingWEN</td>
+                    <td>test01_mingwen_1</td>
+                    <td>密码 admin</td>
+                    <td>0.176s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>http://192.168.43.129:8080/p2p/encryption
+实际结果：{'pwd': '21232f297a57a5a743894a0e4a801fc3', 'statusCode': '2000'}
+预期结果：2000
+test01_mingwen_1 (test01_mingwen.MingWEN)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>2</td>
+                    <td class="MingWEN">MingWEN</td>
+                    <td>test01_mingwen_2</td>
+                    <td>密码123456</td>
+                    <td>0.139s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>http://192.168.43.129:8080/p2p/encryption
+实际结果：{'pwd': 'e10adc3949ba59abbe56e057f20f883e', 'statusCode': '2000'}
+预期结果：2000
+test01_mingwen_2 (test01_mingwen.MingWEN)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>3</td>
+                    <td class="MingWEN">MingWEN</td>
+                    <td>test01_mingwen_3</td>
+                    <td>密码特殊字符</td>
+                    <td>0.133s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>http://192.168.43.129:8080/p2p/encryption
+实际结果：{'pwd': '32a092884ced5c25690ff1a1165da3f2', 'statusCode': '2000'}
+预期结果：2000
+test01_mingwen_3 (test01_mingwen.MingWEN)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>4</td>
+                    <td class="SmsCode">SmsCode</td>
+                    <td>test_smscode_1</td>
+                    <td>正确手机号post</td>
+                    <td>0.188s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'data': {'smsVerificationCode': '787041', 'number': 58, 'phone': '17629196006'}, 'message': '短信验证码已成功获取。验证码有效时间为5分钟！', 'statusCode': '2000'}
+预期结果:2000
+test_smscode_1 (test02_SMSCode.SmsCode)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>5</td>
+                    <td class="SmsCode">SmsCode</td>
+                    <td>test_smscode_2</td>
+                    <td>10位手机号</td>
+                    <td>0.158s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'message': '手机号码验证失败，请检查手机号码是否正确!', 'statusCode': '5000'}
+预期结果:5000
+test_smscode_2 (test02_SMSCode.SmsCode)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>6</td>
+                    <td class="SmsCode">SmsCode</td>
+                    <td>test_smscode_3</td>
+                    <td>带字母的手机号</td>
+                    <td>0.167s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'message': '手机号码验证失败，请检查手机号码是否正确!', 'statusCode': '5000'}
+预期结果:5000
+test_smscode_3 (test02_SMSCode.SmsCode)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>7</td>
+                    <td class="SmsCode">SmsCode</td>
+                    <td>test_smscode_4</td>
+                    <td>带汉字的手机号</td>
+                    <td>0.155s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'message': '手机号码验证失败，请检查手机号码是否正确!', 'statusCode': '5000'}
+预期结果:5000
+test_smscode_4 (test02_SMSCode.SmsCode)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>8</td>
+                    <td class="register">register</td>
+                    <td>test_register_1</td>
+                    <td>手机号获取验证码</td>
+                    <td>0.186s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'data': {'smsVerificationCode': '757050', 'number': 8, 'phone': '13199999999'}, 'message': '短信验证码已成功获取。验证码有效时间为5分钟！', 'statusCode': '2000'}
+预期结果：2000
+test_register_1 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>9</td>
+                    <td class="register">register</td>
+                    <td>test_register_2</td>
+                    <td>10位手机号</td>
+                    <td>0.153s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '手机号输入有误，注册失败，请验证手机号码是否正确！'}
+预期结果：5000
+test_register_2 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>10</td>
+                    <td class="register">register</td>
+                    <td>test_register_3</td>
+                    <td>手机号带字母</td>
+                    <td>0.154s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '手机号输入有误，注册失败，请验证手机号码是否正确！'}
+预期结果：5000
+test_register_3 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>11</td>
+                    <td class="register">register</td>
+                    <td>test_register_4</td>
+                    <td>手机号为空</td>
+                    <td>0.147s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '手机号输入有误，注册失败，请验证手机号码是否正确！'}
+预期结果：5000
+test_register_4 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>12</td>
+                    <td class="register">register</td>
+                    <td>test_register_5</td>
+                    <td>手机号带汉字</td>
+                    <td>0.141s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '手机号输入有误，注册失败，请验证手机号码是否正确！'}
+预期结果：5000
+test_register_5 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>13</td>
+                    <td class="register">register</td>
+                    <td>test_register_6</td>
+                    <td>密码为空</td>
+                    <td>0.18s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名重复，注册失败！'}
+预期结果：5000
+test_register_6 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>14</td>
+                    <td class="register">register</td>
+                    <td>test_register_7</td>
+                    <td>两次密码不一致</td>
+                    <td>0.15s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名重复，注册失败！'}
+预期结果：5000
+test_register_7 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>15</td>
+                    <td class="register">register</td>
+                    <td>test_register_8</td>
+                    <td>密码带汉字</td>
+                    <td>0.16s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名重复，注册失败！'}
+预期结果：5000
+test_register_8 (test03_register.register)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>16</td>
+                    <td class="register">register</td>
+                    <td>test_register_9</td>
+                    <td>正常注册</td>
+                    <td>0.151s</td>
+                    
+                        <td class="text-danger">失败</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名重复，注册失败！'}
+预期结果：2000
+test_register_9 (test03_register.register)执行——>【失败】
+</pre>
+                        
+
+                            <pre>Traceback (most recent call last):
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\common\test_ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\testcase\test03_register.py", line 52, in test_register
+    raise e
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\testcase\test03_register.py", line 48, in test_register
+    self.assertEqual(str(expected),jsonpath(res,'$.statusCode')[0])
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 912, in assertEqual
+    assertion_func(first, second, msg=msg)
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 1292, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 753, in fail
+    raise self.failureException(msg)
+</pre>
+                        
+
+                            <pre>AssertionError: '2000' != '5000'
+- 2000
+? ^
++ 5000
+? ^
+
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>17</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_1</td>
+                    <td>登录成功</td>
+                    <td>0.171s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'data': {'token': 'fefe5077-676c-4f90-9402-8967fc8f5479'}, 'statusCode': '2000', 'message': '登录成功！'}
+预期结果：2000
+test_login_1 (test04_longin.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>18</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_2</td>
+                    <td>手机号错误</td>
+                    <td>0.13s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名或密码错误，登录失败！'}
+预期结果：5000
+test_login_2 (test04_longin.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>19</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_3</td>
+                    <td>手机号为空</td>
+                    <td>0.137s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名或密码为空，登录失败!'}
+预期结果：5000
+test_login_3 (test04_longin.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>20</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_4</td>
+                    <td>密码错误</td>
+                    <td>0.152s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>实际结果：{'statusCode': '5000', 'message': '用户名或密码错误，登录失败！'}
+预期结果：5000
+test_login_4 (test04_longin.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>21</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_1</td>
+                    <td>登录成功（实名前置）</td>
+                    <td>0.17s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'phone': '13199999999', 'passWd': 'admin@123'}
+实际结果：{'data': {'token': '7f5d6150-4ad0-4feb-a259-858cad0cd866'}, 'statusCode': '2000', 'message': '登录成功！'}
+预期结果：2000
+test_login_1 (test05_realcertification.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>22</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_2</td>
+                    <td>正常实名认证</td>
+                    <td>0.164s</td>
+                    
+                        <td class="text-danger">失败</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'token': '7f5d6150-4ad0-4feb-a259-858cad0cd866', 'phone': '13199999999', 'userName': '刘坤', 'idCard': '152221198006203977'}
+实际结果：{'statusCode': '5000', 'message': '账号：13199999999已被身份证152221198006203966绑定！'}
+预期结果：2000
+test_login_2 (test05_realcertification.longin)执行——>【失败】
+</pre>
+                        
+
+                            <pre>Traceback (most recent call last):
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\common\test_ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\testcase\test05_realcertification.py", line 46, in test_login
+    raise e
+</pre>
+                        
+
+                            <pre>  File "D:\learn_python\p2p_project\learn_21day_project\testcase\test05_realcertification.py", line 42, in test_login
+    self.assertEqual(str(expected), jsonpath(res, '$.statusCode')[0])
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 912, in assertEqual
+    assertion_func(first, second, msg=msg)
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 1292, in assertMultiLineEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+</pre>
+                        
+
+                            <pre>  File "D:\python3.8\lib\unittest\case.py", line 753, in fail
+    raise self.failureException(msg)
+</pre>
+                        
+
+                            <pre>AssertionError: '2000' != '5000'
+- 2000
+? ^
++ 5000
+? ^
+
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>23</td>
+                    <td class="longin">longin</td>
+                    <td>test_login_3</td>
+                    <td>手机号错误</td>
+                    <td>0.148s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'token': '7f5d6150-4ad0-4feb-a259-858cad0cd866', 'phone': '131888888', 'userName': 'Jack', 'idCard': '152221198006203987'}
+实际结果：{'statusCode': '5001', 'message': '登录状态验证失败，请重新登录！'}
+预期结果：5001
+test_login_3 (test05_realcertification.longin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>24</td>
+                    <td class="test_newpaypd">test_newpaypd</td>
+                    <td>test_newpay_1</td>
+                    <td>设置交易密码</td>
+                    <td>0.038s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'token': '84b3d214-49ca-4c59-af36-82a717ae86ba', 'phone': '17629196006', 'newPaymentPassword': '123123'}
+实际结果：{'statusCode': '5000', 'message': '非第一次绑定，如需修改，请先点击修改支付密码！'}
+test_newpay_1 (test06_newpaypd.test_newpaypd)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>25</td>
+                    <td class="test_newpaypd">test_newpaypd</td>
+                    <td>test_newpay_2</td>
+                    <td>设置交易密码</td>
+                    <td>0.038s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'token': '84b3d214-49ca-4c59-af36-82a717ae86ba', 'phone': '17629196006', 'newPaymentPassword': '123123'}
+实际结果：{'statusCode': '5000', 'message': '非第一次绑定，如需修改，请先点击修改支付密码！'}
+test_newpay_2 (test06_newpaypd.test_newpaypd)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 200px"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+<script>
+    var tbodyTr = $('tbody tr');
+    var testResult = $("#testResult");
+    var testClass = $("#testClass");
+    <!--    用例执行详细信息显示切换-->
+    $(".btn_info").click(function () {
+        $(this).parent().parent().next().toggle();
+
+    });
+    // 当选择用例类之后触发
+    testClass.change(function () {
+        var cls = $(this).val();
+        var res = testResult.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+    testResult.change(function () {
+        var res = $(this).val();
+        var cls = testClass.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+
+    function elementDisplay(cls, res) {
+        // 用例数据的显示
+        if (cls === "所有") {
+            if (res === "所有") {
+                tbodyTr.has('button').show();
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-success').show()
+
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-danger').show()
+
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-warning').show()
+
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-info').show()
+            }
+        } else {
+            if (res === "所有") {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').show()
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
+            }
+        }
+    }
+
+    function sort() {
+        //重新排列显示序号
+        // 选择所有可以见的tr
+        var visibleTr = tbodyTr.filter(":visible");
+
+        visibleTr.each(function (index, element) {
+            element.firstElementChild.innerHTML = index + 1;
+
+        })
+
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('char'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+    // 指定图表的配置项和数据
+    option = {
+        color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['通过', '失败', '错误', '跳过']
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 23, name: '通过'},
+                    {value: 2, name: '失败'},
+                    {value: 0, name: '错误'},
+                    {value: 0, name: '跳过'}
+                ]
+            }
+        ]
+    };
+    option2 = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'gauge',
+                detail: {formatter: '92.00%'},
+                data: [{value: '92.00', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
+            }
+        ]
+    };
+
+
+    myChart2.setOption(option2);
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+</body>
+</html>
